@@ -17,8 +17,14 @@ model = keras.Sequential(
     ]
 )
 
+inputs = keras.Input(shape=784)
+x = layers.Dense(512, activation='relu')(inputs)
+x = layers.Dense(256, activation='relu')(x)
+outputs = layers.Dense(10, activation='softmax')(x)
+model = keras.Model(inputs=inputs, outputs=outputs)
+
 model.compile(
-    loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    loss=keras.losses.SparseCategoricalCrossentropy(from_logits=False),
     optimizer=keras.optimizers.Adam(learning_rate=0.001),
     metrics=['accuracy']
 )
