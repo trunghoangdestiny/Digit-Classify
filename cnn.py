@@ -36,8 +36,9 @@ def my_model():
     x = layers.Conv2D(128, 3)(x)
     x = layers.BatchNormalization()(x)
     x = keras.activations.relu(x)
-    x = layers.Dense(64, activation='relu')(x)
     x = layers.Flatten()(x)
+    x = layers.Dense(64, activation='relu')(x)
+    x = layers.Dense(16, activation='relu')(x)
     outputs = layers.Dense(10)(x)
     model = keras.Model(inputs=inputs, outputs=outputs)
     return model
@@ -51,5 +52,5 @@ model.compile (
     metrics=['accuracy']
 )
 
-model.fit(x_train, y_train, batch_size=64, epochs=10)
+model.fit(x_train, y_train, batch_size=64, epochs=11)
 model.evaluate(x_test, y_test, batch_size=64)
